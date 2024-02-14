@@ -1,0 +1,54 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ @import "bootstrap";
+
+ .center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container{
+  background: rgb(255, 0, 115);
+  width: 80%; /* 幅は親要素の80% */
+	height: 100vh;
+  max-width: 500px; /* 幅は最大500pxまでしか広げない */
+  margin: 0 auto; /* 左右をauto指定にして左右中央揃えに */
+}
+
+.body{
+  background: rgb(227, 5, 5);
+  height: 200px;
+  position: relative; /*中央揃えしたい要素の親要素に指定*/
+}
+.position-absolute{
+  background: yellow;
+  position: absolute;  /*要素を浮かす*/
+  /*relativeを指定した親要素を支点とした位置をすべて0に指定↓*/
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto; /*上下左右中央に*/
+  width: 300px; /*widthの指定は必須*/
+  height: 300px; /*heightの指定は必須*/
+}
+
+.form-label-lg {
+  font-size: 30px; /* ここは好みのサイズに */
+}
+

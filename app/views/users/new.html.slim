@@ -1,0 +1,30 @@
+= render 'shared/flash_message'
+
+.container.d-flex.flex-column.align-items-center.justify-content-center
+  .col-md-6
+    = form_for @user, html: { class: "form-horizontal" } do |f|
+      .form-group.text-center
+        = f.label :name, class: "control-label form-label-lg"
+        = f.text_field :name, class: "form-control"
+
+      .form-group.text-center
+        = f.label :email, class: "control-label form-label-lg"
+        = f.email_field :email, class: "form-control"
+        
+      .justify-content-center.d-flex
+        = f.submit "登録する", class: "btn btn-primary btn-lg"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

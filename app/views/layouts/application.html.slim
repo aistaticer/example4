@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    = javascript_importmap_tags
+    = javascript_include_tag "application", "data-turbo-track": "reload"
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    /#= javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
+    title V3AdvancedRails
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    /#= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css'
+    /#= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css'
+  body
+    = yield
+

@@ -1,0 +1,47 @@
+= render 'shared/flash_message'
+
+/#.containerk
+  .h2 新規レシピ作成
+
+  = form_with model: @recipe, local: true do |f|
+    .bg-primary.text-white
+      = f.label :name, 'レシピ名'
+    .row_margin
+      .col
+        = f.text_field :name, placeholder:'ここにテキストを入力してください',  class: 'form-control'
+    br
+    = f.fields_for :steps do |step_form|
+      .bg-primary.text-white
+        = step_form.label :description, '料理の手順'
+      .row_margin
+        = step_form.text_area :description, placeholder:'ここにテキストを入力してください',  class: 'form-control'
+    br
+    = f.submit '作成'
+
+= form_with model: @recipe, local: true do |f| 
+  .bg-primary.text-white
+    = f.label :name, 'レシピ名' 
+  .row_margin
+    .col
+      = f.text_field :name, placeholder: 'ここにテキストを入力してください', class: 'form-control' 
+  br
+  .bg-primary.text-white
+    p 料理の手順
+  - process_number = 0
+  = f.fields_for :steps do |step_form| 
+    - process_number += 1
+    = step_form.hidden_field :number, value: process_number
+    .bg-primary.text-white
+      = step_form.label :description, process_number
+    .row_margin
+      = step_form.text_area :description, placeholder: 'ここにテキストを入力してください', class: 'form-control' 
+
+
+  = link_to '手順を追加', '#', id: 'add_step'
+  br
+  = f.submit 'レシピを作成する'
+
+
+<button id="change-text-button">テキストを変える</button>
+<div id="text-to-change">ここにテキストが表示されるよ</div>
+
