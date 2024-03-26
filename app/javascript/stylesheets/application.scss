@@ -3,11 +3,37 @@
 @import "https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Noto+Sans+JP:wght@100..900&display=swap";
 
 
+@keyframes floatUp {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.float-up-text {
+  position: absolute;
+  animation: floatUp 0.5s ease-out forwards;
+}
+
 //　返信欄の行数を増やす
 .comment-field{
   min-height: 6em; /* これは例で、実際の高さは内容やフォントサイズに応じて調整する */
-  //overflow: hidden; /* 内容がはみ出した場合は非表示にする */
+  overflow-wrap: break-word; /* 長い単語を折り返す */
   height: auto; /* 内容に応じて自動調整 */
+}
+
+.setting-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer; /* カーソルを指先の形にする */
+}
+
+.setting-button:hover {
+  color: #aaa; /* マウスオーバー時にマークの色を薄くする */
 }
 
 //　いいねを横並びにするためのスタイル

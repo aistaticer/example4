@@ -89,44 +89,52 @@ function setupAccordion() {
   }
 }
 
+function setupReplyButton() {
+  // ボタンにイベントリスナーを設定
+  var buttons = document.querySelectorAll('.reply-or-setting-button'); // クラス名で全ての返信ボタンを選択
+
+  buttons.forEach(function(buttonContainer) {
+    var settingbutton = buttonContainer.querySelector('.settingbutton');
+    var replybutton = buttonContainer.querySelector('.replybutton');
+
+    if (settingbutton) {
+      settingbutton.addEventListener('click', function() {
+        var commentId = this.getAttribute('data-comment-id');
+        setting_indicate(commentId);
+        var number = this.id.match(/\d+/); // 数字部分を抽出
+        //console.log(number);
+      });
+    }
+
+    if (replybutton) {
+      replybutton.addEventListener('click', function() {
+        var commentId = this.getAttribute('data-comment-id');
+        comment_reply(commentId);
+        var number = this.id.match(/\d+/); // 数字部分を抽出
+        //console.log(number);
+      });
+    }
+  });
+}
+
 /*function setupReplyButton() {
   // ボタンにイベントリスナーを設定
   var buttons = document.querySelectorAll('.reply-button'); // クラス名で全ての返信ボタンを選択
-  var as = document.querySelectorAll('.a');
-
-  as.forEach(function(a) {
-    console.log(a.id);
-  });
 
   buttons.forEach(function(button) {
-    button = buttonContainer.querySelector('button');
-    console.log(button.id);
     button.addEventListener('click', function() {
-      
-      // ここでcomment_replyを呼び出す
       var commentId = this.getAttribute('data-comment-id');
       comment_reply(commentId);
+      setting_indicate(commentId);
+      console.log("aaaaa");
     });
   });
 }*/
 
-function setupReplyButton() {
-  // ボタンにイベントリスナーを設定
-  var buttons = document.querySelectorAll('.reply-button'); // クラス名で全ての返信ボタンを選択
-
-
-  buttons.forEach(function(buttonContainer) {
-    var button = buttonContainer.querySelector('button');
-    button.addEventListener('click', function() {
-      var commentId = this.getAttribute('data-comment-id');
-      comment_reply(commentId);
-    });
-  });
-}
+document.addEventListener("turbo:load", setupReplyButton);
 
 function comment_reply(commentId) {
   // フォームの表示状態を変更
-  
   var form = document.getElementById('comment-reply-form' + commentId);
   console.log(commentId);
   if (form.style.display === "none") {
@@ -139,27 +147,27 @@ function comment_reply(commentId) {
   document.getElementById('parent_id').value = commentId;
 }
 
-// Turboのイベントに対してsetupReplyButtonを呼び出す
-document.addEventListener("turbo:load", setupReplyButton);
-//document.addEventListener("turbo:render", setupReplyButton);
-
 // クリックするとコメントの削除、編集ボタンが出てくる
-
 function settingcommentButton() {
   // ボタンにイベントリスナーを設定
-  var settings = document.querySelectorAll('.setting-button'); // クラス名で全ての返信ボタンを選択
-
+  var settings = document.querySelectorAll('.setting-button-all'); // クラス名で全ての返信ボタンを選択
 
   settings.forEach(function(settingContainer) {
-    var setting = settingContainer.querySelector('setting');
+    var setting = settingContainer.querySelector('.setting-button');
     setting.addEventListener('click', function() {
       var commentId = this.getAttribute('data-comment-id');
-      comment_reply(commentId);
+      setting_indicate(commentId);
     });
   });
 }
 
-document.addEventListener("turbo:load", settingcommentButton);
+function setting_indicate(commentId) {
+  console.log(commentId);
+  // .comment-buttonを取得
+  const settingtButton = document.getElementById('setting-button-commentId');
+}
+
+//document.addEventListener("turbo:load", settingcommentButton);
 
 // クリックすると /recipes にアクセスしてくれる　jQeryを使って練習で作った
 /*document.addEventListener('DOMContentLoaded', function() {
@@ -176,3 +184,41 @@ document.addEventListener("turbo:render", setupAccordion);
 
 document.addEventListener("turbo:load", addformEventListener);
 document.addEventListener("turbo:render", addformEventListener);
+
+function settingButton() {
+  // ボタンにイベントリスナーを設定
+  var settingbuttons = document.querySelectorAll('.setting-button'); // クラス名で全ての返信ボタンを選択
+
+
+  settingbuttons.forEach(function(settingbuttonContainer) {
+    var button = settingbuttonContainer.querySelector('three-point-leader');
+    three-point-leader.addEventListener('click', function() {
+      var commentId = this.getAttribute('data-comment-id');
+      comment_reply(commentId);
+    });
+  });
+}
+
+/*document.addEventListener('DOMContentLoaded', function(){
+  // .comment-buttonを取得
+  const commentButton = document.getElementById('aaa');
+
+  // ボタンがクリックされたときの関数
+  commentButton.addEventListener('click', () => {
+    // 新しいテキストノードを作成
+    const newText = document.createTextNode('ここに表示したい文字');
+
+    // 新しいdiv要素を作成してテキストを追加
+    const newDiv = document.createElement('div');
+    newDiv.appendChild(newText);
+    // float-up-textクラスを追加
+    newDiv.classList.add('float-up-text');
+
+    // スタイルを設定
+    newDiv.style.left = commentButton.offsetLeft + 'px';
+    newDiv.style.top = commentButton.offsetTop + 'px';
+
+    // 作成したdivをbodyに追加
+    document.body.appendChild(newDiv);
+  });
+})*/

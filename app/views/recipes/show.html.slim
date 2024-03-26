@@ -14,7 +14,7 @@ br
     
     - comment.replies.each do | reply |
 
-      = render partial: 'shared/comment/comment_reply', locals: { comment: comment, replycomment: reply }
+      = render partial: 'shared/comment/comment_reply', locals: { recipe: @recipe, comment: comment, replycomment: reply }
 
 br
 

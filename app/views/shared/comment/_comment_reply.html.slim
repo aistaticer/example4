@@ -1,5 +1,3 @@
-
-
 /# コメントの主よりもコンテナの横サイズを小さくしている
 .container.w-75.pt-3
   /# 返信を書き込んだ主. 返信を書き込んだ時間.
@@ -7,23 +5,40 @@
 
   /# コメントを書き込まれる場所
   .comment-field.border.rounded.mb-3
-    -if replycomment.myreply.present?
-      p 返信先: #{link_to replycomment.myreply.user.name, user_path(replycomment.myreply.user)}
-      
+    .d-flex.justify-content-between
+      -if replycomment.myreply.present?
+        p 返信先: #{link_to replycomment.myreply.user.name, user_path(replycomment.myreply.user)}
+      -else
+        .empty
+
+      .reply-or-setting-button
+        .settingbutton id = "setting-button-#{replycomment.id}" data-comment-id="#{replycomment.id}" class="button"
+          i class="fa fa-ellipsis-v" aria-hidden="true"
+
+        /#.a id="display-text" style="display:none;"
+        /  - if replycomment.user == current_user
+        /    = link_to 'コメント削除', recipe_comment_path(recipe, replycomment), data: { turbo_method: :delete}
+
+
 
     /# 返信内容.
     = replycomment.body
     br
-    
+
+
 
     /# 返信を書いた人とログインユーザーが同じなら返信を削除するリンクを表示.
     - if replycomment.user == current_user
-      = link_to 'コメント削除', recipe_comment_path(@recipe, replycomment), data: { turbo_method: :delete}
+      = link_to 'コメント削除', recipe_comment_path(recipe, replycomment), data: { turbo_method: :delete}
 
     /# javascriptでボタンを全部のボタンを取得できるようにreply-buttonクラスで全てのボタンに目印をつける.
-    .reply-button
+    .reply-or-setting-button
       /# ボタン本体　固有のidをつけている　data-comment-idで返信のidをjavascrip閲覧できる変数に代入.
       button id="your-button-#{replycomment.id}" data-comment-id="#{replycomment.id}" 返信
+      .replybutton　id = "setting-button-#{replycomment.id}" data-comment-id="#{replycomment.id}" class="button"
+        p あs
+
+        
 
     /# このクラスにstyle="display:none;"をつけて通常は表示されないようにしている.
   .div style="display:none;" id = "comment-reply-form#{replycomment.id}"
