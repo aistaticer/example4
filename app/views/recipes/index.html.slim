@@ -1,1 +1,20 @@
-p index
+.accordion-container
+  button.accordion レシピ表示
+  .panel
+    .d-flex.flex-wrap
+      - @recipes.each do |recipe|
+        .card tyle="flex-basis: 66%"
+          .d-flex
+            div
+              = render 'shared/recipe_introduce', recipe: recipe
+            
+
+
+br
+
+= link_to '新しいレシピを作成', new_recipe_path
+
+button id="your-button-id" javeで一覧
+
+p#message
+

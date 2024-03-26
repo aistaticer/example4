@@ -1,0 +1,37 @@
+= render 'shared/flash_message'
+
+= form_with model: @recipe, local: true do |f| 
+  .bg-primary.text-white
+    = f.label :name, 'レシピ名' 
+  .row_margin
+    .col
+      = f.text_field :name, placeholder: 'ここにテキストを入力してください', class: 'form-control' 
+      = f.label :thumbnail
+      = f.file_field :thumbnail
+  .bg-primary.text-white
+    = f.label :introduce, 'レシピ紹介文'
+  .row_margin
+    = f.text_field :introduce, placeholder: 'ここにテキストを入力してください', class: 'form-control' 
+    
+  br
+  .bg-primary.text-white
+    p 料理の手順
+  - process_number = 0
+  = f.fields_for :steps do |step_form| 
+    - process_number += 1
+    = step_form.hidden_field :number, value: process_number
+    .bg-primary.text-white
+      = process_number
+    .row_margin
+      = step_form.text_area :description, placeholder: 'ここにテキストを入力してください', class: 'form-control' 
+
+  button#add-element type="button" 要素を追加
+
+  br
+  = f.submit 'レシピを作成する'
+  br
+
+
+
+
+

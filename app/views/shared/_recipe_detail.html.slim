@@ -1,0 +1,17 @@
+.card
+  .d-flex
+    - if recipe.thumbnail.attached?
+      - decorated_recipe = RecipeDecorator.new(recipe)
+      .flex-shrink-0
+      = link_to recipe_path(decorated_recipe) do
+        = image_tag decorated_recipe.resized_recipe_thumbnail(size: 100), id: "yourImageId", class: "mr-3"
+
+    .flex-grow-1
+      .card-body
+        h1.card-title = recipe.name
+        h2 レシピの手順
+        .list-group
+          - recipe.steps.each do |step|
+            .list-group-item
+              h5.list-group-item-heading 作り方 #{step.number}
+              p.list-group-item-text = step.description

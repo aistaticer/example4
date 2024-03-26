@@ -1,0 +1,35 @@
+= render 'shared/flash_message'
+
+= render 'shared/recipe_detail', recipe: @recipe
+
+/#= image_tag @recipe.thumbnail_edited
+
+.a id ="comment_form_after"
+
+br
+
+- @parent_comments.each do |comment|
+  .container.w-95.pt-3
+    = render partial: 'shared/comment/comment_body', locals: { comment: comment }
+    
+    - comment.replies.each do | reply |
+
+      = render partial: 'shared/comment/comment_reply', locals: { comment: comment, replycomment: reply }
+
+br
+
+/# コメント投稿フォーム.
+.container 
+  .hr style="border: 0.1px solid black; width: 100%;"
+  br
+  p コメントを投稿する
+  = render 'shared/comment/comment_form', comment: @comment, recipe: @recipe
+  br
+
+
+
+= link_to 'レシピ一覧', recipes_path 
+br
+= link_to 'レシピ編集',  edit_recipe_path 
+br
+= link_to 'レシピ削除', recipe_path, data: { turbo_method: :delete}

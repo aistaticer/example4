@@ -1,0 +1,4 @@
+- if current_user.liked_recipes.exists?(recipe.id)
+	= render 'shared/liked_button', recipe: recipe
+- else
+	= render 'shared/unliked_button', recipe: recipe

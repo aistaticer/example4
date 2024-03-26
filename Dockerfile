@@ -11,6 +11,12 @@ RUN apt-get update -qq \
 && apt-get update -qq \
 && apt-get install -y build-essential libpq-dev libssl-dev nodejs yarn python3 cron \
 && apt-get install -y npm
+RUN apt-get update && apt-get install -y libvips
+# ImageMagickのインストール
+RUN apt-get update -qq && apt-get install -y imagemagick
+
+# libvipsのインストール
+RUN apt-get update -qq && apt-get install -y libvips-tools
 RUN service cron start
 RUN mkdir /v3_advanced_rails
 WORKDIR /v3_advanced_rails

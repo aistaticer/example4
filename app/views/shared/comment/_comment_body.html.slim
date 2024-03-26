@@ -1,0 +1,28 @@
+/# コメ主とかいた時間
+p #{comment.user.name} さん　#{comment.created_at.strftime('%Y/%m/%d　%H時%M分')}
+
+.card id="comment_#{comment.id}"
+
+  .comment-field
+    = comment.body
+
+  - if comment.user == current_user
+    = link_to 'コメント削除', recipe_comment_path(recipe, comment), data: { turbo_method: :delete}
+  .reply-button
+    button id="your-button-#{comment.id}" data-comment-id="#{comment.id}" 返信
+
+.div style="display:none;" id = "comment-reply-form#{comment.id}"
+  br
+  = form_with model: [@recipe, @comment],style: "display: none;", id: "replyFormTemplate", local: true do |f|
+    .row_margin
+      p 返信先 #{comment.user.name}
+      = f.text_field :body, placeholder: '返信を入力してください', class: 'form-control' 
+      = f.hidden_field :parent_id, value: comment.id, id: "parent_id"
+    .text-end
+      = f.submit '返信する', class: 'btn btn-warning text-white'
+
+br
+
+/#<button type="button">
+/  <i class="fa fa-bars" aria-hidden="true"></i>
+/</button>

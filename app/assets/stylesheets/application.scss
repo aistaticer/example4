@@ -14,20 +14,10 @@
  *= require_self
  */
 
- @import "bootstrap";
-
  .center-container {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.container{
-  background: rgb(255, 0, 115);
-  width: 80%; /* 幅は親要素の80% */
-	height: 100vh;
-  max-width: 500px; /* 幅は最大500pxまでしか広げない */
-  margin: 0 auto; /* 左右をauto指定にして左右中央揃えに */
 }
 
 .body{

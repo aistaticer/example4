@@ -1,0 +1,7 @@
+= form_with model: [recipe, Comment.new], local: true do |f| 
+  .row_margin
+    = f.text_field :body, placeholder: 'コメントを入力してください', class: 'form-control' 
+    = f.hidden_field :parent_id, value: comment.id, id: "parent_id"
+  = f.submit 'コメントを作成する'
+
+

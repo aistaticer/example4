@@ -29,6 +29,7 @@ services:
       - SELENIUM_DRIVER_URL= http://chrome:4444/wd/hub
     ports:
       - "3000:3000"
+      - "9090:9090" # この行を追加
     depends_on:
       - db
       - chrome

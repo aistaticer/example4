@@ -1,0 +1,27 @@
+.flex-grow-1 
+  .d-flex
+    - decorated_recipe = RecipeDecorator.new(recipe)
+
+    - image_path = decorated_recipe.resized_recipe_thumbnail(size: 200)
+    .flex-shrink-0
+      = link_to recipe_path(decorated_recipe || recipe) do
+        = image_tag image_path, id: "yourImageId", class: "mr-3"
+
+
+    .flex-grow-1
+      .card-body
+        = recipe.name
+
+        br
+        .M_PLUS_Rounded_1c
+          = recipe.introduce
+
+        .likes-wrapper
+          .like-heart
+            = render 'shared/like_condition', recipe: recipe
+          = render 'shared/likes_count', recipe: recipe
+
+        
+
+
+

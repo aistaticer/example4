@@ -1,0 +1,2 @@
+= link_to recipe_likes_path(recipe_id: recipe.id), class: 'like-button', id: "liked_button_#{recipe.id}",data: { turbo_method: :delete }, remote: true do
+  i.fa.fa-heart aria-hidden="true"

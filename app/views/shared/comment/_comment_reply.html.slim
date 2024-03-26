@@ -1,0 +1,40 @@
+
+
+/# コメントの主よりもコンテナの横サイズを小さくしている
+.container.w-75.pt-3
+  /# 返信を書き込んだ主. 返信を書き込んだ時間.
+  p #{replycomment.user.name} さん　#{replycomment.created_at.strftime('%Y/%m/%d　%H時%M分')}
+
+  /# コメントを書き込まれる場所
+  .comment-field.border.rounded.mb-3
+    -if replycomment.myreply.present?
+      p 返信先: #{link_to replycomment.myreply.user.name, user_path(replycomment.myreply.user)}
+      
+
+    /# 返信内容.
+    = replycomment.body
+    br
+
+    /# 返信を書いた人とログインユーザーが同じなら返信を削除するリンクを表示.
+    - if replycomment.user == current_user
+      = link_to 'コメント削除', recipe_comment_path(@recipe, replycomment), data: { turbo_method: :delete}
+
+    /# javascriptでボタンを全部のボタンを取得できるようにreply-buttonクラスで全てのボタンに目印をつける.
+    .reply-button
+      /# ボタン本体　固有のidをつけている　data-comment-idで返信のidをjavascrip閲覧できる変数に代入.
+      button id="your-button-#{replycomment.id}" data-comment-id="#{replycomment.id}" 返信
+
+    /# このクラスにstyle="display:none;"をつけて通常は表示されないようにしている.
+  .div style="display:none;" id = "comment-reply-form#{replycomment.id}"
+
+    /# 返信フォーム　parent_idも表示はされないがデータベースに送っている.
+    = form_with model: [@recipe, @comment_reply], id: "replyFormTemplate", local: true do |f|
+      .row_margin
+        /# 返信コメント主名前を表示
+        p 返信先 #{replycomment.user.name}
+        = f.text_field :body, placeholder: '返信を入力してください', class: 'form-control' 
+        = f.hidden_field :parent_id, value: comment.id, id: "parent_id"
+        = f.hidden_field :reply_to_id, value: replycomment.id, id: "reply_to_id"
+      .text-end
+        = f.submit '返信する', class: 'btn btn-warning text-white'
+br

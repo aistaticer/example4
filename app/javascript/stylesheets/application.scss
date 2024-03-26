@@ -1,13 +1,58 @@
 @import "~bootstrap/scss/bootstrap";
+@import "bootstrap";
+@import "https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Noto+Sans+JP:wght@100..900&display=swap";
 
-.containerk {
-  width: 90%;
-  background-color: yellow;
-	margin: auto;
+
+//　返信欄の行数を増やす
+.comment-field{
+  min-height: 6em; /* これは例で、実際の高さは内容やフォントサイズに応じて調整する */
+  //overflow: hidden; /* 内容がはみ出した場合は非表示にする */
+  height: auto; /* 内容に応じて自動調整 */
+}
+
+//　いいねを横並びにするためのスタイル
+.likes-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+//　いいねといいね数の間に間隔をとる
+.like-heart {
+  margin-right: 5px; /* 左に10pxのマージンを追加 */
 }
 
 .row_margin{
 	padding-right: 10px;
 	padding-left: 10px;
 	padding-bottom: 10px;
+}
+
+.flex-grow-1 {
+  min-height: 100px;
+  width: calc(100vw * 0.3); /* 画面の幅の33% */
+  max-width: 400px; /* 最大幅設定 */
+  min-width: 150px; /* 最小幅設定 */
+  margin:20px;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: space-around; /* または space-between を使う */
+}
+
+.M_PLUS_Rounded_1c {
+  word-wrap: break-word;
+}
+
+.Hannari{
+	font-family:'Hannari';
+}
+
+.serif{
+	font-family:'serif';
+}
+
+.panel {
+  display: none;
+  /* その他のスタイリング */
 }

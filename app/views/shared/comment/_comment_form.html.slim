@@ -1,0 +1,6 @@
+= form_with model: [recipe, Comment.new], local: true do |f| 
+  .row_margin
+    = f.text_field :body, placeholder: 'コメントを入力してください', class: 'form-control' 
+  = f.submit 'コメントを作成する'
+
+
