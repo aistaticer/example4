@@ -101,8 +101,6 @@ function setupReplyButton() {
       settingbutton.addEventListener('click', function() {
         var commentId = this.getAttribute('data-comment-id');
         setting_indicate(commentId);
-        var number = this.id.match(/\d+/); // 数字部分を抽出
-        //console.log(number);
       });
     }
 
@@ -110,26 +108,10 @@ function setupReplyButton() {
       replybutton.addEventListener('click', function() {
         var commentId = this.getAttribute('data-comment-id');
         comment_reply(commentId);
-        var number = this.id.match(/\d+/); // 数字部分を抽出
-        //console.log(number);
       });
     }
   });
 }
-
-/*function setupReplyButton() {
-  // ボタンにイベントリスナーを設定
-  var buttons = document.querySelectorAll('.reply-button'); // クラス名で全ての返信ボタンを選択
-
-  buttons.forEach(function(button) {
-    button.addEventListener('click', function() {
-      var commentId = this.getAttribute('data-comment-id');
-      comment_reply(commentId);
-      setting_indicate(commentId);
-      console.log("aaaaa");
-    });
-  });
-}*/
 
 document.addEventListener("turbo:load", setupReplyButton);
 
@@ -147,6 +129,58 @@ function comment_reply(commentId) {
   document.getElementById('parent_id').value = commentId;
 }
 
+/*function setting_indicate(commentId) {
+  var links = document.getElementById('links-' + commentId);
+  console.log("setting_indicate" + commentId);
+
+  // linksの表示・非表示を切り替え
+  if (links.style.display === "none") {
+    links.style.display = 'block';
+  } else {
+    links.style.display = 'none';
+  }
+}*/
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('click', function hideLinks(e) {
+    console.log(e.target.className);
+  })
+})
+
+function setting_indicate(commentId) {
+  var links = document.getElementById('links-' + commentId);
+  console.log(links.id);
+
+  // linksの表示・非表示を切り替え
+  if (links.style.display === "none") {
+    links.style.display = 'block';
+    //setTimeout(function() {
+      document.addEventListener('click', function hideLinks(e) {
+        // クリックされた要素が目的のアイコンか、その子要素かをチェック
+        let currentElement = e.target;
+        while (currentElement != null) {
+          // 目的のアイコンがクリックされた場合
+          if (currentElement.id === 'icon-' + commentId) {
+            // 必要な処理をここに記述
+            break; // Whileループを抜ける
+          }
+          // 親要素へ移動
+          currentElement = currentElement.parentElement;
+        }
+      
+        // linksがクリックされた場所に含まれていない、かつクリックされたのがアイコンでもその子要素でもない場合
+        if (!links.contains(e.target) && currentElement === null) {
+          links.style.display = 'none';
+          console.log(e.target.id);
+          document.removeEventListener('click', hideLinks);
+        }
+      });
+    //}, 0); // setTimeoutを使ってイベントリスナーの追加を遅らせる
+  } else {
+    //links.style.display = 'none';
+  }
+}
+
 // クリックするとコメントの削除、編集ボタンが出てくる
 function settingcommentButton() {
   // ボタンにイベントリスナーを設定
@@ -159,12 +193,6 @@ function settingcommentButton() {
       setting_indicate(commentId);
     });
   });
-}
-
-function setting_indicate(commentId) {
-  console.log(commentId);
-  // .comment-buttonを取得
-  const settingtButton = document.getElementById('setting-button-commentId');
 }
 
 //document.addEventListener("turbo:load", settingcommentButton);
@@ -222,3 +250,4 @@ function settingButton() {
     document.body.appendChild(newDiv);
   });
 })*/
+

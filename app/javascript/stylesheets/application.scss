@@ -2,6 +2,10 @@
 @import "bootstrap";
 @import "https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Noto+Sans+JP:wght@100..900&display=swap";
 
+//アイコンの上下を文字と合わせる
+.fa-icon {
+  vertical-align: middle;
+}
 
 @keyframes floatUp {
   from {
@@ -26,14 +30,20 @@
   height: auto; /* 内容に応じて自動調整 */
 }
 
-.setting-button {
-  background-color: transparent;
-  border: none;
+//　返信ボタンと三点リーダーの上にマウスを置くとカーソルを指先の形にする
+.reply-or-setting-button {
   cursor: pointer; /* カーソルを指先の形にする */
 }
 
-.setting-button:hover {
-  color: #aaa; /* マウスオーバー時にマークの色を薄くする */
+//　返信ボタンと三点リーダーの上にマウスを置くと色が薄くなる
+.reply-or-setting-button:hover{
+  color: #aaa;
+}
+
+.reply-or-setting-button:active{
+  color: rgba(170, 170, 170, 0.5);
+  transform: scale(0.8);
+  transform-origin: top right; /* 基点を左上に設定 */
 }
 
 //　いいねを横並びにするためのスタイル
@@ -65,6 +75,27 @@
   display: flex;
   justify-content: space-around; /* または space-between を使う */
 }
+
+.link_card {
+  position: absolute;
+  display: block; /* 枠を表示する */
+  width: 110px; /* 正方形の幅を指定 */
+  height: 110px; /* 正方形の高さを指定 */
+  border: 3px solid #c97a19; /* 枠線を黒色で1px指定 */
+  border-radius: 10px;
+  background-color: #c01c1c;
+}
+
+.icon-bigger {
+  //padding: 10px; /* クリック可能な領域を拡大 */
+  //margin-right: 2px; /* アイコンの周りに余白を追加 */
+  z-index: 3;
+}
+
+
+
+
+
 
 .M_PLUS_Rounded_1c {
   word-wrap: break-word;

@@ -11,13 +11,16 @@
       -else
         .empty
 
-      .reply-or-setting-button
+      .reply-or-setting-button id = "ie-i"
         .settingbutton id = "setting-button-#{replycomment.id}" data-comment-id="#{replycomment.id}" class="button"
-          i class="fa fa-ellipsis-v" aria-hidden="true"
+          .icon-bigger id = "icon-#{replycomment.id}"
+            i class="fa fa-ellipsis-v" aria-hidden="true" id = "sasa"
 
-        /#.a id="display-text" style="display:none;"
-        /  - if replycomment.user == current_user
-        /    = link_to 'コメント削除', recipe_comment_path(recipe, replycomment), data: { turbo_method: :delete}
+        .link_card id="links-#{replycomment.id}" style="display:none;"
+          - if replycomment.user == current_user
+            = link_to 'コメント削除', recipe_comment_path(recipe, replycomment), data: { turbo_method: :delete}
+
+
 
 
 
@@ -34,9 +37,11 @@
     /# javascriptでボタンを全部のボタンを取得できるようにreply-buttonクラスで全てのボタンに目印をつける.
     .reply-or-setting-button
       /# ボタン本体　固有のidをつけている　data-comment-idで返信のidをjavascrip閲覧できる変数に代入.
-      button id="your-button-#{replycomment.id}" data-comment-id="#{replycomment.id}" 返信
       .replybutton　id = "setting-button-#{replycomment.id}" data-comment-id="#{replycomment.id}" class="button"
-        p あs
+        .d-flex.justify-content-end
+          .fa-icon
+            i class="fa-regular fa-pen-to-square"
+          p 返信
 
     /# このクラスにstyle="display:none;"をつけて通常は表示されないようにしている.
   .div style="display:none;" id = "comment-reply-form#{replycomment.id}"
